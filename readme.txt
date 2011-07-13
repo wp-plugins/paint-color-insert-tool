@@ -42,7 +42,7 @@ For more Information, please visit [My perfect Color]: (http://www.myperfectcolo
 
 == Troubleshooting ==
 
-Do not hesitate to send your feedbacks to http://myperfectcolor.com/contactus if you find problems using the plugin.
+Do not hesitate to send your feedbacks to http://www.myperfectcolor.com/Contact-us/6.htm if you find problems using the plugin.
 
 == Changelog ==
 
