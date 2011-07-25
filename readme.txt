@@ -14,7 +14,7 @@ Insert a button into the editor which opens a popup window letting users insert 
 
 Insert a button into the editor which opens a popup window letting users insert images and links of paint color matches from over 100 paint brands. Includes all colors/schemes and products from MyPerfectColor.com. Very useful time saving plugin for bloggers who write about interior design, architecture and color.
 
-For more Information, please visit [My perfect Color]: (http://www.myperfectcolor.com "Simply find your perfect color")
+For more Information, please visit [My Perfect Color] (http://www.myperfectcolor.com/ "Simply find your perfect color").
 
 == Installation ==
 
@@ -42,7 +42,7 @@ For more Information, please visit [My perfect Color]: (http://www.myperfectcolo
 
 == Troubleshooting ==
 
-Do not hesitate to send your feedbacks to http://www.myperfectcolor.com/Contact-us/6.htm if you find problems using the plugin.
+Do not hesitate to send your feedbacks to [My Perfect Color] (http://www.myperfectcolor.com/Contact-us/6.htm "Contact us")
 
 == Changelog ==
 
