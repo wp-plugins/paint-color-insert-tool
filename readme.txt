@@ -47,4 +47,5 @@ Do not hesitate to send your feedbacks to [My Perfect Color] (http://www.myperfe
 == Changelog ==
 
 **1.0** - Initial Release
+**1.1** - Added Pagination and resource filter
 
