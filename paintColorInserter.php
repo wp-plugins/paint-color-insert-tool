@@ -4,7 +4,7 @@
   Plugin URI: http://www.myperfectcolor.com/
   Description: Insert a button into the editor which opens a popup window letting users insert images and links of paint color matches from over 100 paint brands. Includes all colors/schemes and products from MyPerfectColor.com. Very useful time saving plugin for bloggers who write about interior design, architecture and color.
   Author: MyPerfectColor
-  Version: 1.0
+  Version: 1.1
   Author URI: http://www.myperfectcolor.com/
  */
 
@@ -32,7 +32,7 @@ class PaintColorInserter {
 	}
 	
 	function action_admin_init() {
-		if (current_user_can('edit_posts') && current_user_can('edit_pages')) {
+		if (current_user_can('edit_posts')) {
 			add_filter('mce_buttons', array($this, 'filter_mce_button'));
 			add_filter('mce_external_plugins', array($this, 'filter_mce_plugin'));
 		}
@@ -56,7 +56,11 @@ wp_register_script( 'pci_settings',plugin_dir_url(__FILE__) . 'pci_settings.js')
 wp_localize_script( 'pci_settings', 'settings', array('pci_email' => get_option('pci_email'),'plugin_dir' => plugin_dir_url(__FILE__)));
 wp_enqueue_script( 'pci_settings' );
 
+wp_register_script( 'pci_pagination',plugin_dir_url(__FILE__) . 'pagination.js');
+wp_enqueue_script( 'pci_pagination');
+
 add_shortcode('mpc-paint-color-insert-tool', 'mpc_paint_color_inserter_shortcode');
+add_shortcode('mpc-paint-color-inserter', 'mpc_paint_color_inserter_shortcode');
 add_action('admin_menu', 'paint_color_inserter_menu');
 
 function paint_color_inserter_menu() {

@@ -37,11 +37,11 @@ if (!isset($table_prefix)){
 }
 
 
-$xml = simplexml_load_file($_GET['url'] . "?component=" . $_GET['component'] . "&controller=" . $_GET['controller'] . "&action=" . $_GET['action'] . "&keyword=" . $_GET['keyword'] . "&plugin=" . $_GET['plugin'] . "&email=" . $_GET['email']);
+$xml = simplexml_load_file($_GET['url'] . "?component=" . $_GET['component'] . "&controller=" . $_GET['controller'] . "&action=" . $_GET['action'] . "&keyword=" . $_GET['keyword'] . "&resource=" . $_GET['resource'] . "&brand=" . $_GET['brand'] . "&from=" . $_GET['from'] . "&step=" . $_GET['step'] . "&plugin=" . $_GET['plugin'] . "&email=" . $_GET['email']);
 
 if ($xml === FALSE) {
 
-	$xmlStr = wp_remote_fopen($_GET['url'] . "?component=" . $_GET['component'] . "&controller=" . $_GET['controller'] . "&action=" . $_GET['action'] . "&keyword=" . $_GET['keyword'] . "&plugin=" . $_GET['plugin'] . "&email=" . $_GET['email'], 'r');
+	$xmlStr = wp_remote_fopen($_GET['url'] . "?component=" . $_GET['component'] . "&controller=" . $_GET['controller'] . "&action=" . $_GET['action'] . "&keyword=" . $_GET['keyword'] . "&resource=" . $_GET['resource'] . "&brand=" . $_GET['brand'] . "&from=" . $_GET['from'] . "&step=" . $_GET['step'] . "&plugin=" . $_GET['plugin'] . "&email=" . $_GET['email'], 'r');
 
 	if ($xmlStr) {
 		$xml = new SimpleXMLElement($xmlStr);

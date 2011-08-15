@@ -5,7 +5,7 @@ URL: http://myperfectcolor.com
 Tags: Paint,Color,Color Scheme,TinyMCE,shortcode,plugin,image,images
 Requires at least: 2.9
 Tested up to: 3.1.2
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2
 
 Insert a button into the editor which opens a popup window letting users insert images and links of paint color matches from MyPerfectColor.com.

@@ -43,6 +43,21 @@
 				<small id="small-keyword">Specify keyword to search.</small></td>\
 			</tr>\
 			<tr>\
+				<th style="width:125px;"><label for="target-resource">Resource</label></th>\
+				<td><select name="target-resource" id="target-resource">\
+					<option value="all">All</option>\
+					<option value="color">Color</option>\
+					<option value="scheme">Scheme</option>\
+					<option value="product">Product</option>\
+				</select><br />\
+			</tr>\
+			<tr id="resource-tr">\
+				<th style="width:125px;"><label for="resource-brand">Brand</label></th>\
+				<td><select name="resource-brand" id="resource-brand">'
+					+available_brands+
+				'</select><br />\
+			</tr>\
+			<tr>\
 				<th style="width:125px;"><label for="shortCode-type">ShortCode Type</label></th>\
 				<td><select name="short-code-type" id="short-code-type">\
 					<option value="image">Image</option>\
@@ -69,8 +84,9 @@
 			<input type="button" id="paint-color-inserter-submit" class="button-primary" value="Insert ShortCode" name="submit" />\
 		</p>\
 		</div>');
-		
+
 		var table = form.find('table');
+		var pager = new Pagination;
 		form.appendTo('body').hide();
 
 
@@ -84,15 +100,37 @@
 
 		});
 
+		form.find('#target-resource').change(function(){
+			var target_resource = jQuery(this).val();
+			var brandSelect = jQuery('#resource-tr');
+			if(target_resource == 'scheme')
+				brandSelect.hide();
+			else
+				brandSelect.show();
+		});
+
 		form.find('#keyword-search').keypress(function(event){
 			 if (event.which == '13') {
 				jQuery('#paint-color-inserter-search').click();
 			 }
 		});
 
-		// handles the click event of the search button
-		form.find('#paint-color-inserter-search').click(function(){
+		jQuery(pager.getPageLinkClass()).live('click', function(pagination_link_event){
+			pagination_link_event.preventDefault();
+			var e = jQuery.Event("click");
+			var page_link = jQuery(this);
+			var href = page_link.attr('href');
 
+			var page_selected = page_link.attr('rel');
+			e.from = pager.url_param('from', href);
+			e.step = pager.url_param('step', href);
+			e.current_page = page_selected;
+			jQuery("#paint-color-inserter-search").trigger(e);
+
+		});
+
+		// handles the click event of the search button
+		form.find('#paint-color-inserter-search').click(function(e){
 
 			jQuery('#no-results').text('loading.');
 			iPCI = setInterval("loadingPCI()",1000);
@@ -100,6 +138,9 @@
 			var imageHost = 'http://images.myperfectcolor.com/';
 			var siteUrl = 'http://www.myperfectcolor.com/index.php';
 			var keyword = jQuery('#keyword-search').val();
+			var resource = jQuery('#target-resource').val();
+			var brand = jQuery('#resource-brand').val();
+
 
 			if(!keyword){
 				alert('Please, enter a keyword to search.');
@@ -120,6 +161,10 @@
 					controller : 'CWebservice',
 					action: 'search',
 					keyword: keyword,
+					resource: resource,
+					brand: brand,
+					from: e.from,
+					to: e.step,
 					plugin: pci_name,
 					email: pci_email
 				},
@@ -134,6 +179,9 @@
 					}
 
 					var tfoot = jQuery('<tfoot id="search-results"></tfoot>');
+
+					var result_rows = (jQuery(xml).find('result')).attr('numFound');
+
 
 					
 					jQuery(xml).find('doc').each(function(){
@@ -194,7 +242,6 @@
 
 						}
 
-
 						// VISIBLE ROWS
 						row.append('<td><label for="'+ id +'"><img rel="'+ id +'" onerror="javascript:errorImgPCI(this)" src="' + imgSrc +'"/></label></td>');
 						row.append('<td class="title"><label for="'+ id +'">' + title + '</label></td>');
@@ -210,24 +257,13 @@
 					});
 
 					table.append(tfoot);
+					pager.init(result_rows,e.current_page);
+					tfoot.append(jQuery(pager.create_links()));
 
 					return false;
-
-
-
-
-
 				}
 			});
-
-
-
-
-			
-
-
 		});
-
 
 
 		// handles the click event of the submit button
